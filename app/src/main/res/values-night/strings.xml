@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Flicker</string>
     <string name="login">Login</string>
     <string name="loginLabel">Email</string>
     <string name="password">Password</string>

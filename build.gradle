@@ -2,8 +2,14 @@
 
 
 buildscript {
+    repositories {
+        // Check that you have the following line (if not, add it):
+        google()  // Google's Maven repository
+
+    }
     dependencies {
         classpath("com.google.dagger:hilt-android-gradle-plugin:2.40.5")
+        classpath 'com.google.gms:google-services:4.3.10'
     }
 }
 plugins {
