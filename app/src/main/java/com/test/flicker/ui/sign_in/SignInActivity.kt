@@ -10,8 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.test.flicker.MainActivity
-import com.test.flicker.R
+import com.test.flicker.ui.home.HomeActivity
 import com.test.flicker.databinding.ActivitySignInBinding
 
 class SignInActivity : AppCompatActivity() {
@@ -110,8 +109,16 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun updateUI(user: FirebaseUser?) {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+
+        if (user != null) {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        } else {
+            Toast.makeText(
+                this, "Authentication failed.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     private fun reload() {
