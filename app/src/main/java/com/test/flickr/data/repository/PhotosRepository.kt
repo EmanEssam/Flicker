@@ -4,6 +4,6 @@ import com.test.flickr.model.PhotosResponse
 
 interface PhotosRepository {
 
-    suspend fun getMoviesPhotos(searchKey: String, apiKey: String): PhotosResponse<Any>
+    suspend fun getPhotos(searchKey: String, apiKey: String): PhotosResponse<Any>
 
 }

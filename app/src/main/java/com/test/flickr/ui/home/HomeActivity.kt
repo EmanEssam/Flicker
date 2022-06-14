@@ -9,10 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.test.flickr.R
 import com.test.flickr.databinding.ActivityMainBinding
-import com.test.flickr.utils.PhotoBuilder.getPhotoUrl
 import com.test.flickr.ui.home.adapter.PhotoAdapter
+import com.test.flickr.utils.PhotoBuilder.getPhotoUrl
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -30,14 +31,13 @@ class HomeActivity : AppCompatActivity() {
         setUpObserver()
     }
 
-
     private fun setUpObserver() {
         lifecycleScope.launch {
-            homeViewModel.getPhotos()
+            homeViewModel.getPhotos(apiKey = getString(R.string.api_key))
         }
-
         homeViewModel.photosResponse.observe(this, Observer {
-            binding.moviesRv.visibility = View.VISIBLE
+            binding.photosRV.visibility = View.VISIBLE
+            adapter.submitList(emptyList())
             adapter.submitList(it)
             showPhotosList()
             hideProgressDialog()
@@ -53,9 +53,9 @@ class HomeActivity : AppCompatActivity() {
             val bundle =
                 bundleOf("image" to getPhotoUrl(it.farm, it.server, it.id.toString(), it.secret))
         }
-        val layoutManager = GridLayoutManager(applicationContext, 2)
-        binding.moviesRv.layoutManager = layoutManager
-        binding.moviesRv.adapter = adapter
+        val layoutManager = LinearLayoutManager(this)
+        binding.photosRV.layoutManager = layoutManager
+        binding.photosRV.adapter = adapter
 
     }
 
@@ -72,7 +72,10 @@ class HomeActivity : AppCompatActivity() {
                     if (it.isNotEmpty() && it.isNotBlank()) {
                         showProgressDialog()
                         hidePhotosList()
-                        homeViewModel.getPhotos(it)
+                        homeViewModel.getPhotos(
+                            apiKey = getString(R.string.api_key),
+                            searchKey = it
+                        )
                     }
                 }
                 return true
@@ -82,11 +85,11 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun hidePhotosList() {
-        binding.moviesRv.visibility = View.GONE
+        binding.photosRV.visibility = View.GONE
     }
 
     private fun showPhotosList() {
-        binding.moviesRv.visibility = View.VISIBLE
+        binding.photosRV.visibility = View.VISIBLE
     }
 
     private fun hideProgressDialog() {

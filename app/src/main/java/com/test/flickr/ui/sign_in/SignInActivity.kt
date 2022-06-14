@@ -113,6 +113,7 @@ class SignInActivity : AppCompatActivity() {
         if (user != null) {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
+            finish()
         } else {
             Toast.makeText(
                 this, "Authentication failed.",

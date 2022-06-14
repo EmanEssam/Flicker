@@ -12,7 +12,6 @@ import com.test.flickr.R
 import com.test.flickr.databinding.ItemPhotoBinding
 import com.test.flickr.model.Photo
 import com.test.flickr.utils.PhotoBuilder.getPhotoUrl
-import okhttp3.OkHttpClient
 
 
 class PhotoAdapter(private val listener: (photo: Photo) -> Unit) :
@@ -37,6 +36,16 @@ class PhotoAdapter(private val listener: (photo: Photo) -> Unit) :
             }
             photo?.let {
 
+
+//                binding.photo.load( getPhotoUrl(
+//                    photo.farm,
+//                    photo.server,
+//                    photo.id,
+//                    photo.secret
+//                )){
+//                    placeholder(R.drawable.ic_photo)
+//                    error(R.drawable.brokenimage)
+//                }
 //                    Glide.with(context)
 //                        .load(
 //                            getPhotoUrl(
@@ -48,7 +57,7 @@ class PhotoAdapter(private val listener: (photo: Photo) -> Unit) :
 //                        )
 //                        .timeout(600000)
 //                        .placeholder(R.drawable.ic_photo)
-//                        .error(R.drawable.brokenimage)
+//                        .error(R.drawable.ic_photo)
 //                    .into(binding.photo);
 //                val picasso = Picasso.Builder(context)
 //                    .listener { _, _, e ->
@@ -68,19 +77,26 @@ class PhotoAdapter(private val listener: (photo: Photo) -> Unit) :
 //                    .error(R.drawable.ic_photo)
 //                    .into(binding.photo)
 
-                Picasso.get().load(imageUrl)
-                    .resize(100, 100)
-                    .centerInside()
+//                val okHttpClient = OkHttpClient()
+//                val okHttp3Downloader = OkHttp3Downloader(okHttpClient)
+//                val picasso = Picasso.Builder(context)
+//                    .downloader(okHttp3Downloader)
+//                    .build()
+                Picasso.get().load("https://farm66.staticflickr.com/65535/52146372110_2f79497603_w.jpg")
+                    .resize(200, 200)
                     .placeholder(R.drawable.ic_photo)
                     .error(R.drawable.ic_photo)
                     .into(binding.photo, object : Callback {
-                        override fun onSuccess() {}
+                        override fun onSuccess() {
+                        }
 
                         override fun onError(e: Exception?) {
                             e?.printStackTrace()
                         }
 
                     })
+
+
                 binding.photoTitle.text = photo.title
                 binding.photoDescription.text = photo.description._content
                 binding.authorName.text = photo.ownername

@@ -15,7 +15,7 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
     @Provides
-    fun provideMoviesPhotosApi(
+    fun providePhotosApi(
         remoteDataSource: RetrofitFactory,
         @ApplicationContext context: Context
     ): PhotosApiInterface {
@@ -23,9 +23,9 @@ object NetworkModule {
     }
 
     @Provides
-    fun provideMoviesRemoteDataSourceImpl(
-        moviesRemoteDataSourceImpl: PhotosRemoteDataSourceImpl
+    fun providePhotosRemoteDataSourceImpl(
+        photosRemoteDataSourceImpl: PhotosRemoteDataSourceImpl
     ): PhotosRemoteDataSource {
-        return moviesRemoteDataSourceImpl
+        return photosRemoteDataSourceImpl
     }
 }

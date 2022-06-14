@@ -15,6 +15,4 @@ interface PhotosApiInterface {
         @Query(value = "text") searchKey: String,
         @Query(value = "extras") extras: String = "description,owner_name,date_taken"
     ): PhotosResponse<Any>
-//    https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=e184e6334420e5b4021827775adcf1fa&text=h&format=json
-//    https://www.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=e184e6334420e5b4021827775adcf1fa&format=json&page=1&per_page=10&nojsoncallback=1
 }

@@ -4,13 +4,13 @@ import com.test.flickr.model.PhotosResponse
 import com.test.flickr.data.repository.PhotosRepository
 import javax.inject.Inject
 
-class GetMoviesPhotosUseCaseImpl @Inject constructor(
+class GetPhotosUseCaseImpl @Inject constructor(
     private val repository: PhotosRepository
-) : GetMoviesPhotosUseCase {
+) : GetPhotosUseCase {
 
-    override suspend fun getMoviesPhotos(
+    override suspend fun getPhotos(
         searchKey:String,apiKey: String
     ): PhotosResponse<Any> {
-        return repository.getMoviesPhotos(searchKey,apiKey)
+        return repository.getPhotos(searchKey,apiKey)
     }
 }

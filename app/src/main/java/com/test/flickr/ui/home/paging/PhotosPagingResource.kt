@@ -2,13 +2,13 @@ package com.test.flickr.ui.home.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.test.flickr.domain.photos.GetMoviesPhotosUseCase
+import com.test.flickr.domain.photos.GetPhotosUseCase
 import com.test.flickr.model.Photo
 import retrofit2.HttpException
 import java.io.IOException
 
-class MoviesPagingResource(
-    private val moviesPhotosUseCase: GetMoviesPhotosUseCase,
+class PhotosPagingResource(
+    private val photosUseCase: GetPhotosUseCase,
     private val pageCount: Int?
 ) : PagingSource<Int, Photo>() {
     override fun getRefreshKey(state: PagingState<Int, Photo>): Int? {
@@ -19,7 +19,7 @@ class MoviesPagingResource(
         val page = params.key ?: DEFAULT_PAGE_INDEX
         return try {
             val response =
-                moviesPhotosUseCase.getMoviesPhotos("",
+                photosUseCase.getPhotos("",
                     apiKey = API_KEY
                 )
             LoadResult.Page(

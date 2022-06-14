@@ -13,6 +13,6 @@ import dagger.hilt.android.scopes.ViewModelScoped
 object RepositoryModule {
     @Provides
     @ViewModelScoped
-    fun bindMoviesRepository(moviesRepository: PhotosRepositoryImpl): PhotosRepository =
-        moviesRepository
+    fun bindPhotosRepository(photosRepository: PhotosRepositoryImpl): PhotosRepository =
+        photosRepository
 }

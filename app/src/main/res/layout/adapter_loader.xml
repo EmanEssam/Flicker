@@ -10,7 +10,7 @@
         android:id="@+id/retry_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/purple_700"
+        android:backgroundTint="@color/colorAccent"
         android:text="@string/retry"
         android:textColor="@android:color/white"
         app:cornerRadius="10dp"
