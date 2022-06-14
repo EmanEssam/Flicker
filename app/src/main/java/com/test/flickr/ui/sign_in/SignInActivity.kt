@@ -47,7 +47,6 @@ class SignInActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun signIn(email: String, password: String) {
         // [START sign_in_with_email]
         auth.signInWithEmailAndPassword(email, password)

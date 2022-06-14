@@ -30,8 +30,9 @@
             android:layout_marginTop="@dimen/size_10"
             android:ellipsize="end"
             android:maxLines="1"
+            android:textSize="@dimen/font_18"
+            android:fontFamily="@font/sf_text_bold"
             android:paddingHorizontal="@dimen/size_10"
-            android:text="Pink Women Shoes"
             android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@+id/photo" />
 
@@ -41,32 +42,45 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/size_10"
             android:layout_marginTop="@dimen/size_8"
-            android:layout_marginEnd="@dimen/size_4"
-            android:lines="1"
-            android:text="16,299 EGP"
+            android:layout_marginEnd="@dimen/size_8"
+            android:textSize="@dimen/font_14"
             android:textColor="@color/black"
+            android:fontFamily="@font/sf_text_medium"
             app:autoSizeTextType="uniform"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/photo_title" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/author_name"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_10"
+            android:textSize="@dimen/font_12"
+            android:fontFamily="@font/sf_text_bold"
+            app:layout_constraintStart_toEndOf="@+id/author_name_tv"
+            app:layout_constraintTop_toBottomOf="@id/photo_description" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/author_name_tv"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/size_10"
             android:lines="1"
-            android:text="23,299 EGP"
+            android:textSize="@dimen/font_12"
+            android:fontFamily="@font/sf_text_bold"
+            android:text="Author Name :"
             app:layout_constraintStart_toStartOf="parent"
             app:autoSizeTextType="uniform"
             app:layout_constraintTop_toBottomOf="@id/photo_description" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/photo_date"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/size_10"
             android:lines="1"
-            android:text="23,299 EGP"
+            android:textSize="@dimen/size_10"
+            android:fontFamily="@font/sf_text_bold"
             app:autoSizeTextType="uniform"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/author_name" />

@@ -12,6 +12,10 @@ import com.test.flickr.R
 import com.test.flickr.databinding.ItemPhotoBinding
 import com.test.flickr.model.Photo
 import com.test.flickr.utils.PhotoBuilder.getPhotoUrl
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 class PhotoAdapter(private val listener: (photo: Photo) -> Unit) :
@@ -82,7 +86,8 @@ class PhotoAdapter(private val listener: (photo: Photo) -> Unit) :
 //                val picasso = Picasso.Builder(context)
 //                    .downloader(okHttp3Downloader)
 //                    .build()
-                Picasso.get().load("https://farm66.staticflickr.com/65535/52146372110_2f79497603_w.jpg")
+                Picasso.get()
+                    .load("https://farm66.staticflickr.com/65535/52146372110_2f79497603_w.jpg")
                     .resize(200, 200)
                     .placeholder(R.drawable.ic_photo)
                     .error(R.drawable.ic_photo)
@@ -100,9 +105,13 @@ class PhotoAdapter(private val listener: (photo: Photo) -> Unit) :
                 binding.photoTitle.text = photo.title
                 binding.photoDescription.text = photo.description._content
                 binding.authorName.text = photo.ownername
-                binding.photoDate.text = photo.datetaken
 
-
+                val originalFormat: DateFormat =
+                    SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH)
+                val targetFormat: DateFormat = SimpleDateFormat("dd,MMMM,yyyy", Locale.ENGLISH)
+                val date: Date = originalFormat.parse(photo.datetaken)
+                val formattedDate: String = targetFormat.format(date)
+                binding.photoDate.text = formattedDate
             }
         }
 
