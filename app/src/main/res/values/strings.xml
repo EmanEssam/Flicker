@@ -6,4 +6,6 @@
     <string name="retry">retry</string>
     <string name="label_error">Error</string>
     <string name="api_key">e184e6334420e5b4021827775adcf1fa</string>
+    <string name="authentication_error">Authentication failed.</string>
+    <string name="required_field">Required field</string>
 </resources>

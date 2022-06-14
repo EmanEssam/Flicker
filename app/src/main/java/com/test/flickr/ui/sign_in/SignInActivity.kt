@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.test.flickr.R
 import com.test.flickr.ui.home.HomeActivity
 import com.test.flickr.databinding.ActivitySignInBinding
 
@@ -24,55 +25,27 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        // [START initialize_auth]
-        // Initialize Firebase Auth
         auth = Firebase.auth
         initViews()
-        // [END initialize_auth]
     }
 
     private fun initViews() {
         binding.loginBtn.setOnClickListener {
-            binding.loginProgressBar.visibility = View.VISIBLE
-            signIn(
-                binding.loginEmailET.editText?.text.toString(),
-                binding.loginPasswordET.editText?.text.toString(),
-            )
-        }
-    }
+            val userEmail = binding.loginEmailET.editText?.text
+            val userPassword = binding.loginPasswordET.editText?.text
 
-
-    // [START on_start_check_user]
-    public override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            reload();
-        }
-    }
-    // [END on_start_check_user]
-
-    private fun createAccount(email: String, password: String) {
-        // [START create_user_with_email]
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "createUserWithEmail:success")
-                    val user = auth.currentUser
-                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    updateUI(null)
-                }
+            if (userEmail?.isEmpty()!! || userEmail.isBlank()) {
+                binding.loginEmailET.editText?.error = getString(R.string.required_field)
+            } else if (userPassword?.isEmpty()!! || userPassword.isBlank()) {
+                binding.loginPasswordET.editText?.error = getString(R.string.required_field)
+            } else {
+                binding.loginProgressBar.visibility = View.VISIBLE
+                signIn(
+                    binding.loginEmailET.editText?.text.toString(),
+                    binding.loginPasswordET.editText?.text.toString(),
+                )
             }
-        // [END create_user_with_email]
+        }
     }
 
     private fun signIn(email: String, password: String) {
@@ -89,23 +62,13 @@ class SignInActivity : AppCompatActivity() {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
                     Toast.makeText(
-                        baseContext, "Authentication failed.",
+                        baseContext, getString(R.string.authentication_error),
                         Toast.LENGTH_SHORT
                     ).show()
                     updateUI(null)
                 }
             }
         // [END sign_in_with_email]
-    }
-
-    private fun sendEmailVerification() {
-        // [START send_email_verification]
-        val user = auth.currentUser!!
-        user.sendEmailVerification()
-            .addOnCompleteListener(this) { task ->
-                // Email Verification sent
-            }
-        // [END send_email_verification]
     }
 
     private fun updateUI(user: FirebaseUser?) {
@@ -116,15 +79,12 @@ class SignInActivity : AppCompatActivity() {
             finish()
         } else {
             Toast.makeText(
-                this, "Authentication failed.",
+                this, getString(R.string.authentication_error),
                 Toast.LENGTH_SHORT
             ).show()
         }
     }
 
-    private fun reload() {
-
-    }
 
     companion object {
         private const val TAG = "EmailPassword"

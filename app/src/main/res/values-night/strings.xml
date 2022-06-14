@@ -3,4 +3,6 @@
     <string name="login">Login</string>
     <string name="loginLabel">Email</string>
     <string name="password">Password</string>
+    <string name="authentication_error">Authentication failed.</string>
+    <string name="required_field">Required field</string>
 </resources>
