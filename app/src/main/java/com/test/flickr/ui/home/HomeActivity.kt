@@ -1,5 +1,6 @@
 package com.test.flickr.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
@@ -12,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.test.flickr.R
 import com.test.flickr.databinding.ActivityMainBinding
+import com.test.flickr.model.Photo
 import com.test.flickr.ui.home.adapter.PhotoAdapter
 import com.test.flickr.utils.PhotoBuilder.getPhotoUrl
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,13 +52,22 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         adapter = PhotoAdapter {
-            val bundle =
-                bundleOf("image" to getPhotoUrl(it.farm, it.server, it.id.toString(), it.secret))
+            openFullSizeScreen(it)
         }
         val layoutManager = LinearLayoutManager(this)
         binding.photosRV.layoutManager = layoutManager
         binding.photosRV.adapter = adapter
 
+    }
+
+    private fun openFullSizeScreen(photo: Photo) {
+        val intent = Intent(this, ImageFullSizeActivity::class.java)
+        intent.putExtra("id", photo.id)
+        intent.putExtra("secret", photo.secret)
+        intent.putExtra("server", photo.server)
+        intent.putExtra("farm", photo.farm)
+
+        startActivity(intent)
     }
 
 

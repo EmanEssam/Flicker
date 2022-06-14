@@ -6,7 +6,7 @@ const val PHOTO_BASE_URL = "https://farm"
 const val SLASH = "/"
 const val UNDERSCORE = "_"
 const val JPG = ".jpg"
-const val size ="w"
+const val size ="s"
 
 object PhotoBuilder {
     fun getPhotoUrl(farm: Int, server: String, id: String, secret: String): String {

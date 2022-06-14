@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_photo.xml" value="0.1325" />
+        <entry key="app/src/main/res/layout/activity_image_full_size.xml" value="0.23324275362318841" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.128" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.23641304347826086" />
         <entry key="app/src/main/res/layout/adapter_loader.xml" value="0.18342391304347827" />

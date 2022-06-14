@@ -1,12 +1,15 @@
 package com.test.flickr.ui.home.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.squareup.picasso.Callback
+import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
 import com.test.flickr.R
 import com.test.flickr.databinding.ItemPhotoBinding
@@ -26,22 +29,12 @@ class PhotoAdapter(private val listener: (photo: Photo) -> Unit) :
         private val binding: ItemPhotoBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(photo: Photo?) {
-            val imageUrl = photo?.let {
-                getPhotoUrl(
-                    it.farm,
-                    photo.server,
-                    photo.id,
-                    photo.secret
-                )
-            }
-
             binding.photo.setOnClickListener {
                 listener.invoke(photo!!)
             }
             photo?.let {
 
-
-//                binding.photo.load( getPhotoUrl(
+//                binding.photo.load getPhotoUrl(
 //                    photo.farm,
 //                    photo.server,
 //                    photo.id,
@@ -50,19 +43,19 @@ class PhotoAdapter(private val listener: (photo: Photo) -> Unit) :
 //                    placeholder(R.drawable.ic_photo)
 //                    error(R.drawable.brokenimage)
 //                }
-//                    Glide.with(context)
-//                        .load(
-//                            getPhotoUrl(
-//                                photo.farm,
-//                                photo.server,
-//                                photo.id,
-//                                photo.secret
-//                            )
-//                        )
-//                        .timeout(600000)
-//                        .placeholder(R.drawable.ic_photo)
-//                        .error(R.drawable.ic_photo)
-//                    .into(binding.photo);
+                    Glide.with(context)
+                        .load(
+                            getPhotoUrl(
+                                photo.farm,
+                                photo.server,
+                                photo.id,
+                                photo.secret
+                            )
+                        )
+                        .timeout(60000)
+                        .placeholder(R.drawable.ic_photo)
+                        .error(R.drawable.ic_photo)
+                    .into(binding.photo)
 //                val picasso = Picasso.Builder(context)
 //                    .listener { _, _, e ->
 //                        Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
@@ -86,22 +79,24 @@ class PhotoAdapter(private val listener: (photo: Photo) -> Unit) :
 //                val picasso = Picasso.Builder(context)
 //                    .downloader(okHttp3Downloader)
 //                    .build()
-                Picasso.get()
-                    .load("https://farm66.staticflickr.com/65535/52146372110_2f79497603_w.jpg")
-                    .resize(200, 200)
-                    .placeholder(R.drawable.ic_photo)
-                    .error(R.drawable.ic_photo)
-                    .into(binding.photo, object : Callback {
-                        override fun onSuccess() {
-                        }
+//                Picasso.get()
+//                    .load("https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_s.jpg")
+//                    .placeholder(R.drawable.ic_photo)
+//                    .error(R.drawable.ic_photo)
+//                    .memoryPolicy(MemoryPolicy.NO_CACHE)
+//                    .into(binding.photo, object : Callback {
+//                        override fun onSuccess() {
+//                        }
+//
+//                        override fun onError(e: Exception?) {
+//                            e?.printStackTrace()
+//                        }
+//                    })
 
-                        override fun onError(e: Exception?) {
-                            e?.printStackTrace()
-                        }
 
-                    })
-
-
+                Log.d(
+                    "imageurl", "https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg"
+                )
                 binding.photoTitle.text = photo.title
                 binding.photoDescription.text = photo.description._content
                 binding.authorName.text = photo.ownername

@@ -14,3 +14,6 @@ data class Photo(
     val datetaken: String,
     val ownername: String
 )
+
+
+
