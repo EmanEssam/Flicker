@@ -20,11 +20,12 @@
         <activity
             android:name=".ui.home.ImageFullSizeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name="com.test.flickr.ui.sign_in.SignInActivity"
             android:exported="true"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.home.HomeActivity"
             android:exported="true"
